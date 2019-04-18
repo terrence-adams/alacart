@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ALaCart.Models
 {
-    class Site
+    public class Site
     {
         public int ID { get; set; }
 

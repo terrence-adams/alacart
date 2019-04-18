@@ -1,0 +1,34 @@
+﻿@model List<Restaurant>
+
+
+
+<h1>Restaurants on Site</h1>
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+
+    @foreach (var restaurant in Model)
+    {
+        <tr>
+            <td>@restaurant.Name</td>
+            <td>@restaurant.Description</td>
+        </tr>
+
+    }
+
+    @if (Model.Count == 0)
+    {
+        <tr colspan="2">
+            <td>There are no restaurants on site today. Sorry!</td>
+        </tr>
+
+    }
+
+
+</table>
+
+<a class="btn btn-primary" asp-action="add" asp-controller="site">Add Restaurant</a>

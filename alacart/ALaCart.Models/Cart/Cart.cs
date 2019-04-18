@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ALaCart.Models
 {
-    class Customer
+    public class Cart
     {
     }
 }
