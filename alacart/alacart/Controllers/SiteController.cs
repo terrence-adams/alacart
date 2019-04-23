@@ -32,5 +32,22 @@ namespace ALaCart.Controllers
             return View(nameof(Index), Restaurants);
 
         }
+
+
+        public IActionResult Delete(int iD)
+        {
+            var restaurant = Restaurants.Single(r => r.ID == iD);
+            Restaurants.Remove(restaurant);
+            return View(nameof(Index), Restaurants);
+
+        }
+
+        public IActionResult Details(int iD)
+        {
+            var restaurant = Restaurants.Single(r => r.ID == iD);
+
+            return View(restaurant);
+
+        }
     }
 }
