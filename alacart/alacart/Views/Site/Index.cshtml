@@ -1,0 +1,57 @@
+﻿@model List<Restaurant>
+
+
+
+<h1>Restaurants on Site</h1>
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+
+    @foreach (var restaurant in Model)
+    {
+        <tr>
+            <td>@restaurant.Name</td>
+            <td>@restaurant.Description</td>
+            <td><a asp-controller="site" asp-action="details" asp-route-id="@restaurant.ID">Details</a></td>
+        </tr>
+
+    }
+
+    @if (Model.Count == 0)
+    {
+        <tr colspan="2">
+            <td>There are no restaurants on site today. Sorry!</td>
+        </tr>
+
+    }
+
+
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @*<div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>*@s
+        <div class="modal-body">
+            Welcome to The Site Management Page
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+
+</div>
+
+<a class="btn btn-primary" asp-action="add" asp-controller="site">Add Restaurant</a>
