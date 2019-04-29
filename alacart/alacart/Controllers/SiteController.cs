@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ALaCart.Models;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace ALaCart.Controllers
 {
@@ -34,6 +34,7 @@ namespace ALaCart.Controllers
         }
 
 
+
         public IActionResult Delete(int iD)
         {
             var restaurant = Restaurants.Single(r => r.ID == iD);
@@ -41,6 +42,7 @@ namespace ALaCart.Controllers
             return View(nameof(Index), Restaurants);
 
         }
+
 
         public IActionResult Details(int iD)
         {
