@@ -1,0 +1,37 @@
+﻿@model Restaurant
+
+@{
+    ViewData["Title"] = "Form";
+}
+
+@{
+    var action = Model == null ? "Add" : "Edit";
+
+}
+
+@if (action == "Add")
+{
+
+    <h1>Add a new restaurant</h1>
+
+}
+
+else
+{
+    <h1>Edit existing restaurant</h1>
+}
+
+
+<form asp-action="@action" asp-controller="site" method="post">
+
+    <div class="form-group"></div>
+    <label asp-for="Name"></label>
+    <input class="form-control" asp-for="Name" />
+
+    <div class="form-group"></div>
+    <label asp-for="Description"></label>
+    <input class="form-control" asp-for="Description" />
+
+    <button type="submit" class="btn btn-primary">@action</button>
+    <a class="btn btn-secondary" asp-action="index" asp-controller="site"> Cancel</a>
+</form>
