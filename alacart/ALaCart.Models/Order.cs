@@ -7,9 +7,12 @@ namespace ALaCart.Models
 {
     public class Order
     {
+        [Required]
         public int ID { get; set; }
+
         public List<MenuItem> Items { get; set; }
 
+        [Required]
         public Site Site { get; set; }
 
         [Required]

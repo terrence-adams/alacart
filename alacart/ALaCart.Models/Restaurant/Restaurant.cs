@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace ALaCart.Models
 {
     public class Restaurant
     {
+        [Required]
         public int ID { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
 
+        [Required]
+        [MaxLength(100)]
         public string Description { get; set; }
 
         public List<Menu> RestaurantMenus { get; set; }
