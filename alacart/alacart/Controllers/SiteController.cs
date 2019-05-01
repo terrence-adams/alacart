@@ -34,6 +34,17 @@ namespace ALaCart.Controllers
         }
 
 
+        public IActionResult Edit(int id, Restaurant updatedRestaurant)
+        {
+            var oldRestaurant = Restaurants.Single(r => r.ID == updatedRestaurant.ID);
+
+            oldRestaurant.Name = updatedRestaurant.Name;
+            oldRestaurant.Description = updatedRestaurant.Description;
+
+            return View(nameof(Index), Restaurants);
+
+        }
+
 
         public IActionResult Delete(int iD)
         {
