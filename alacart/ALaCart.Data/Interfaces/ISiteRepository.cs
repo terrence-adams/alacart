@@ -10,7 +10,7 @@ namespace ALaCart.Data.Interfaces
         //CRUD
         Restaurant Create(Restaurant newRestaurant);
 
-        Restaurant Delete(int iD);
+        bool Delete(int iD);
 
         Restaurant Update(Restaurant oldRestaurant);
 
