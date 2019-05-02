@@ -12,8 +12,6 @@ namespace ALaCart.Models
 
         public List<MenuItem> MenuItems { get; set; }
 
-        [Required]
-        public Restaurant RestaurantID { get; set; }
 
     }
 }
