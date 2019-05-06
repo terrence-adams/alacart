@@ -62,5 +62,16 @@ namespace ALaCart.Data.Implementation.SQL_Server
 
             return oldRestaurant;
         }
+
+
+        public ICollection<Restaurant> GetAllRestaurants()
+        {
+
+            using (var context = new ALaCartDbContext() )
+            {
+                return context.Restaurants.ToList();
+            }
+
+        }
     }
 }

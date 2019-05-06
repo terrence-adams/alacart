@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ALaCart.Data.Interfaces
 {
-    interface IRestaurantRepository
+    public interface IRestaurantRepository
     {
         //CRUD
 

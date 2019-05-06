@@ -10,7 +10,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ALaCart", "alacart\ALaCart.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ALaCart.Models", "ALaCart.Models\ALaCart.Models.csproj", "{90E7D3B4-4122-47DD-B90A-5593DC07EC80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALaCart.Data", "ALaCart.Data\ALaCart.Data.csproj", "{46D1D76D-4861-489F-B5A4-08EE3E746DE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ALaCart.Data", "ALaCart.Data\ALaCart.Data.csproj", "{46D1D76D-4861-489F-B5A4-08EE3E746DE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALaCart.Service", "ALaCart.Service\ALaCart.Service.csproj", "{61567375-2CF4-4AEB-98C0-D9EDF5529F64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,10 @@ Global
 		{46D1D76D-4861-489F-B5A4-08EE3E746DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46D1D76D-4861-489F-B5A4-08EE3E746DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46D1D76D-4861-489F-B5A4-08EE3E746DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61567375-2CF4-4AEB-98C0-D9EDF5529F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61567375-2CF4-4AEB-98C0-D9EDF5529F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61567375-2CF4-4AEB-98C0-D9EDF5529F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61567375-2CF4-4AEB-98C0-D9EDF5529F64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
