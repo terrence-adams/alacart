@@ -5,11 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\ALaCart.Data\ALaCart.Data.csproj" />
     <ProjectReference Include="..\ALaCart.Models\ALaCart.Models.csproj" />
+    <ProjectReference Include="..\alacart\ALaCart.csproj" />
   </ItemGroup>
 
 </Project>
