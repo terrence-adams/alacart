@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ALaCart.Data.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ALaCart.Data;
+using ALaCart.Data.Implementation.SQL_Server;
+using ALaCart.Service;
 
 namespace alacart
 {
@@ -33,8 +37,26 @@ namespace alacart
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+
+
+
         }
 
+
+        private void AddRepositoryImplementation(IServiceCollection services)
+        {
+
+            services.AddSingleton<ISiteRepository, SqlServerSiteRepository>();
+
+        }
+
+        private void AddServiceImplementation(IServiceCollection services)
+        {
+            services.AddSingleton<ISiteService, SiteService>();
+
+
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

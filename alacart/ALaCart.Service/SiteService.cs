@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ALaCart.Controllers;
 using ALaCart.Data;
 using ALaCart.Models;
 using ALaCart.Data.Interfaces;
@@ -19,6 +18,8 @@ namespace ALaCart.Service
         Restaurant Update(Restaurant oldRestaurant);
 
         Restaurant GetById(int id);
+
+        ICollection<Restaurant> GetAllRestaurants();
 
 
     }
@@ -51,6 +52,13 @@ namespace ALaCart.Service
         public Restaurant Update(Restaurant oldRestaurant)
         {
             return _siteRepository.Update(oldRestaurant);
+        }
+
+
+        public ICollection<Restaurant> GetAllRestaurants()
+        {
+
+            return _siteRepository.GetAllRestaurants();
         }
     }
 }

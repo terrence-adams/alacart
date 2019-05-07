@@ -8,7 +8,7 @@ using ALaCart.Data.Context;
 
 namespace ALaCart.Data.Implementation.SQL_Server
 {
-    class SqlServerSiteRepository : ISiteRepository
+    public class SqlServerSiteRepository : ISiteRepository
     {
         public Restaurant Create(Restaurant newRestaurant)
         {
@@ -67,7 +67,7 @@ namespace ALaCart.Data.Implementation.SQL_Server
         public ICollection<Restaurant> GetAllRestaurants()
         {
 
-            using (var context = new ALaCartDbContext() )
+            using (var context = new ALaCartDbContext())
             {
                 return context.Restaurants.ToList();
             }
