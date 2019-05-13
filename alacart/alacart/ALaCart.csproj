@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ALaCart.Data\ALaCart.Data.csproj" />
     <ProjectReference Include="..\ALaCart.Models\ALaCart.Models.csproj" />
+    <ProjectReference Include="..\ALaCart.Service\ALaCart.Service.csproj" />
   </ItemGroup>
 
 </Project>
