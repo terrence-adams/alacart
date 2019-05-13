@@ -22,6 +22,7 @@ namespace ALaCart.Service
         ICollection<Restaurant> GetAllRestaurants();
 
 
+
     }
 
     public class SiteService : ISiteService
