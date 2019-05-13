@@ -12,6 +12,10 @@ namespace ALaCart.Models
 
         public List<MenuItem> MenuItems { get; set; }
 
+        public Restaurant RestaurantOfMenu { get; set; }
+
+        public int RestaurantIdOfMenu { get; set; }
+
 
     }
 }

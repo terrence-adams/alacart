@@ -8,7 +8,7 @@ namespace ALaCart.Models
 {
     public class Restaurant
     {
-        [Required]
+
         public int ID { get; set; }
 
         [Required]
@@ -20,6 +20,8 @@ namespace ALaCart.Models
         public string Description { get; set; }
 
         public List<Menu> RestaurantMenus { get; set; }
+
+        public int RestaurantMenuID { get; set; }
 
 
     }
