@@ -21,6 +21,9 @@ namespace ALaCart.Models
 
         public List<Customer> Customers { get; set; }
 
+        public int RestaurantID { get; set; }
+
+
 
 
 
