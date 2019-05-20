@@ -14,14 +14,21 @@ namespace ALaCart.Controllers
         public List<Restaurant> Restaurants = new List<Restaurant>();
 
         private readonly ISiteService _siteService;
+        private readonly IRestaurantService _restaurantService;
+        private const string RESTAURANTS = "Restaurants";
 
-        public SiteController(ISiteService siteService)
+        public SiteController(ISiteService siteService, IRestaurantService restaurantService)
         {
             _siteService = siteService;
+            _restaurantService = restaurantService;
         }
 
         public IActionResult Index()
         {
+            if (TempData["Error"] != null)
+            {
+                ViewData.Add("Error", TempData["Error"]); //passing the error value to View
+            }
             var restaurants = _siteService.GetAllRestaurants();
             return View(restaurants);
         }
@@ -29,7 +36,8 @@ namespace ALaCart.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-
+            var restaurants = _restaurantService.GetAll();
+            ViewData.Add(RESTAURANTS, restaurants);
             return View("Form");
         }
 
@@ -75,7 +83,7 @@ namespace ALaCart.Controllers
             var deleted = _siteService.Delete(iD);
             if (!deleted)
             {
-                ViewBag.Error = " Unable to delete restaurant at this time.";
+                ViewData.Add("Error", " Unable to delete restaurant at this time.");
             }
             return RedirectToAction(nameof(Index));
 

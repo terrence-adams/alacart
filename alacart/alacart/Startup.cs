@@ -48,12 +48,14 @@ namespace alacart
         {
 
             services.AddSingleton<ISiteRepository, SqlServerSiteRepository>();
+            services.AddSingleton<IRestaurantRepository, SqlServerRestaurantRepository>();
 
         }
 
         private void AddServiceImplementation(IServiceCollection services)
         {
             services.AddSingleton<ISiteService, SiteService>();
+            services.AddSingleton<IRestaurantService, RestaurantService>();
 
 
         }

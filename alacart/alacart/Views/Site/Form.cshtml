@@ -6,6 +6,9 @@
 
 @{
     var action = Model == null ? "Add" : "Edit";
+    var restaurantsOnSite = ViewData["Restaurants"] as ICollection<Restaurant>;
+    IEnumerable<SelectListItem> restaurantItems = new SelectList(restaurantsOnSite, "Id", "Description");
+
 
 }
 
@@ -31,6 +34,11 @@ else
     <div class="form-group"></div>
     <label asp-for="Description"></label>
     <input class="form-control" asp-for="Description" />
+
+    <div class="form-group">
+        <label asp-for="ID"></label>
+        <select asp-for="ID" asp-items="@restaurantItems"></select>
+    </div>
 
     <button type="submit" class="btn btn-primary">@action</button>
     <a class="btn btn-secondary" asp-action="index" asp-controller="site"> Cancel</a>
