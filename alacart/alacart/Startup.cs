@@ -13,6 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ALaCart.Data;
 using ALaCart.Data.Implementation.SQL_Server;
 using ALaCart.Service;
+using Microsoft.AspNetCore.Identity;
+using ALaCart.Data.Context;
+using ALaCart.Models;
 
 namespace alacart
 {
@@ -37,6 +40,13 @@ namespace alacart
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<ALaCartDbContext>();
+            services.AddIdentity<Customer, IdentityUser>()
+                .AddEntityFrameworkStores<ALaCartDbContext>();
+
+
+            AddRepositoryImplementation(services);
+            AddServiceImplementation(services);
 
 
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using ALaCart.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ALaCart.Data.Context
 {
-    public class ALaCartDbContext : DbContext
+    public class ALaCartDbContext : IdentityDbContext<Customer>
     {
         public DbSet<Restaurant> Restaurants { get; set; }
 
@@ -15,6 +16,8 @@ namespace ALaCart.Data.Context
         public DbSet<Menu> Menus { get; set; }
 
         public DbSet<MenuItem> MenuItems { get; set; }
+
+
 
 
 

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ALaCart.Models
 {
-    public class Customer
+    public class Customer : IdentityUser
     {
         [Required]
         public int ID { get; set; }
@@ -24,7 +25,7 @@ namespace ALaCart.Models
 
         [Required]
         [MaxLength(10)]
-        public string PhoneNumber { get; set; }
+        //public string PhoneNumber { get; set; } existing property in class
 
         public Cart CustomerCart { get; set; }
 
