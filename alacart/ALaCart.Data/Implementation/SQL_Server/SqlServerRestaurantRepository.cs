@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ALaCart.Data.Implementation.SQL_Server
 {
-    class SqlServerRestaurantRepository : IRestaurantRepository
+    public class SqlServerRestaurantRepository : IRestaurantRepository
     {
         public ICollection<Restaurant> GetAll()
         {

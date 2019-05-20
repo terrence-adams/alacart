@@ -8,7 +8,7 @@ namespace ALaCart.Service
 {
     public interface IRestaurantService
     {
-        Restaurant GetById();
+        Restaurant GetById(int Id);
 
         ICollection<Restaurant> GetAll();
 
@@ -18,14 +18,16 @@ namespace ALaCart.Service
 
     public class RestaurantService : IRestaurantService
     {
+        private readonly IRestaurantRepository _restaurantRepository;
+
         public ICollection<Restaurant> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _restaurantRepository.GetAll();
         }
 
-        public Restaurant GetById()
+        public Restaurant GetById(int Id)
         {
-            throw new System.NotImplementedException();
+            return _restaurantRepository.GetById(Id);
         }
     }
 }
