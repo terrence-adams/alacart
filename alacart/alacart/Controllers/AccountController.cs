@@ -30,10 +30,7 @@ namespace ALaCart.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            RedirectUserWhenAlreadLoggedIn();
             return View();
 
         }
@@ -76,6 +73,36 @@ namespace ALaCart.Controllers
             return View(vm);
 
         }
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            RedirectUserWhenAlreadLoggedIn();
+            return View();
+
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+
+
+        }
+
+        private IActionResult RedirectUserWhenAlreadLoggedIn()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return null;
+
+        }
+
 
 
     }
