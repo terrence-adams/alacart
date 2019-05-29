@@ -8,8 +8,6 @@ namespace ALaCart.Models
 {
     public class Customer : IdentityUser
     {
-        [Required]
-        public int ID { get; set; }
 
         [Required]
         [MaxLength(30)]
@@ -27,7 +25,6 @@ namespace ALaCart.Models
         [MaxLength(10)]
         //public string PhoneNumber { get; set; } existing property in class
 
-        public Cart CustomerCart { get; set; }
 
         public Address CustomerAddress { get; set; }
 

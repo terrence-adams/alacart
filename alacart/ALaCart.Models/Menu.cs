@@ -7,14 +7,14 @@ namespace ALaCart.Models
 {
     public class Menu
     {
-        [Required]
+
         public int ID { get; set; }
 
         public List<MenuItem> MenuItems { get; set; }
 
         public Restaurant RestaurantOfMenu { get; set; }
 
-        public int RestaurantIdOfMenu { get; set; }
+        public string RestaurantIdOfMenu { get; set; }
 
 
     }

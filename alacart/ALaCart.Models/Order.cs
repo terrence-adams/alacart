@@ -7,7 +7,7 @@ namespace ALaCart.Models
 {
     public class Order
     {
-        [Required]
+
         public int ID { get; set; }
 
         public List<MenuItem> Items { get; set; }
@@ -16,6 +16,6 @@ namespace ALaCart.Models
         public Site Site { get; set; }
 
         [Required]
-        public Customer Customer { get; set; }
+        public string CustomerID { get; set; }
     }
 }

@@ -31,6 +31,7 @@ namespace ALaCart.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); //identity server
             modelBuilder.Entity<Restaurant>().HasData(
                 new Restaurant { ID = 1, Name = "Old Hubbards", Description = "Soul food" },
                 new Restaurant { ID = 2, Name = "Billy Ray's Burgers", Description = "Classic burgers and shakes." },

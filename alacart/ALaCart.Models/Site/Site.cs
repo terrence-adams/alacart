@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ALaCart.Models
 {
     public class Site
     {
-        [Required]
+
         public int ID { get; set; }
 
         [Required]
@@ -21,7 +22,7 @@ namespace ALaCart.Models
 
         public List<Customer> Customers { get; set; }
 
-        public int RestaurantID { get; set; }
+        public string RestaurantID { get; set; }
 
 
 

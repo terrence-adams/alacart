@@ -41,8 +41,11 @@ namespace alacart
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<ALaCartDbContext>();
-            services.AddIdentity<Customer, IdentityUser>()
+            services.AddIdentity<Customer, IdentityRole>()
                 .AddEntityFrameworkStores<ALaCartDbContext>();
+
+
+
 
 
             AddRepositoryImplementation(services);

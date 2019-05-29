@@ -6,6 +6,7 @@ namespace ALaCart.Models
 {
     public class ALaCartMaster
     {
+        public int ID { get; set; }
         List<Site> Master;
     }
 }

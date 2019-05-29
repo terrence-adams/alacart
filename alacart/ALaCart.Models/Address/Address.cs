@@ -7,7 +7,7 @@ namespace ALaCart.Models
 {
     public class Address
     {
-        [Required]
+
         public int ID { get; set; }
 
         [Required]
