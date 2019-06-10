@@ -8,7 +8,7 @@ namespace ALaCart.Models
 {
     public class RegisterViewModel
     {
-        [DataType(DataType.PhoneNumber), Required]
+        [Phone, Required]
         public string PhoneNumber { get; set; }
 
         [DataType(DataType.Password), Required]

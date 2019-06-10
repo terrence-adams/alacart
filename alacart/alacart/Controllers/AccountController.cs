@@ -83,6 +83,33 @@ namespace ALaCart.Controllers
 
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LogInViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(vm.PhoneNumber, vm.Password, vm.RememberMe, false);
+                var user = User;
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                else
+                {
+                    ModelState.AddModelError("", "Email or Password incorrect.");
+                }
+
+            }
+
+            return View(vm);
+
+
+
+        }
+
         public async Task<IActionResult> LogOut()
         {
 

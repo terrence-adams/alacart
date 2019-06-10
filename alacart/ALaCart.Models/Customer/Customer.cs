@@ -21,9 +21,9 @@ namespace ALaCart.Models
         [MaxLength(30)]
         public string EmailAddress { get; set; }
 
-        [Required]
+        /*[Required]
         [MaxLength(10)]
-        //public string PhoneNumber { get; set; } existing property in class
+        public string PhoneNumber { get; set; }*/
 
 
         public Address CustomerAddress { get; set; }

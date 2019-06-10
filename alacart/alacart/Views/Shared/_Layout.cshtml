@@ -41,6 +41,12 @@
                                 <a asp-controller="account" asp-action="register" class="nav-link text-dark">Register</a>
                             </li>
                         }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="account" asp-action="logout" class="nav-link text-dark">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
