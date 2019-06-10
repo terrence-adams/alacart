@@ -18,6 +18,10 @@ namespace ALaCart.Data.Interfaces
 
         ICollection<Restaurant> GetAllRestaurants();
 
+        ICollection<Restaurant> GetAllRestaurantsById(string restaurantId);
+
+
+
 
     }
 }

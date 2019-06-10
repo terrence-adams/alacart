@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using ALaCart.Models;
 using System.ComponentModel.DataAnnotations;
 using ALaCart.Service;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ALaCart.Controllers
 {
@@ -15,12 +17,14 @@ namespace ALaCart.Controllers
 
         private readonly ISiteService _siteService;
         private readonly IRestaurantService _restaurantService;
+        private readonly UserManager<AppUser> _userManager;
         private const string RESTAURANTS = "Restaurants";
 
-        public SiteController(ISiteService siteService, IRestaurantService restaurantService)
+        public SiteController(ISiteService siteService, IRestaurantService restaurantService, UserManager<AppUser> userManager)
         {
             _siteService = siteService;
             _restaurantService = restaurantService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -29,7 +33,9 @@ namespace ALaCart.Controllers
             {
                 ViewData.Add("Error", TempData["Error"]); //passing the error value to View
             }
-            var restaurants = _siteService.GetAllRestaurants();
+            var userId = _userManager.GetUserId(User);
+
+            var restaurants = _siteService.GetAllRestaurantsById(userId);
             return View(restaurants);
         }
 
@@ -47,6 +53,8 @@ namespace ALaCart.Controllers
         {
             if (ModelState.IsValid)
             {
+                newRestaurant.InternalCustomerId = _userManager.GetUserId(User);
+
                 _siteService.Create(newRestaurant);
                 return RedirectToAction(nameof(Index));
 
@@ -89,7 +97,7 @@ namespace ALaCart.Controllers
 
         }
 
-
+        [Authorize(Roles = "Admin, Vendor")]
         public IActionResult Details(int iD)
         {
             var restaurant = _siteService.GetById(iD);

@@ -64,8 +64,25 @@ namespace ALaCart.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(newUser, false);
-                    return RedirectToAction("Index", "Home");
+                    result = await _userManager.AddToRoleAsync(newUser, vm.Role);
+
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(newUser, false);
+
+                        if (vm.Role == "AdminController")
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
+
+                        else if (vm.Role == "Vendor")
+                        {
+                            return RedirectToAction("Index", "Vendor");
+
+                        }
+
+                        return RedirectToAction("Index", "Account");
+                    }
 
                 }
 

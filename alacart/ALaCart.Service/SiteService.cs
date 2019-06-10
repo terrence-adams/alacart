@@ -21,6 +21,8 @@ namespace ALaCart.Service
 
         ICollection<Restaurant> GetAllRestaurants();
 
+        ICollection<Restaurant> GetAllRestaurantsById(string restaurantId);
+
 
 
     }
@@ -60,6 +62,14 @@ namespace ALaCart.Service
         {
 
             return _siteRepository.GetAllRestaurants();
+        }
+
+
+        public ICollection<Restaurant> GetAllRestaurantsById(string restaurantId)
+        {
+
+            return _siteRepository.GetAllRestaurantsById(restaurantId);
+
         }
     }
 }

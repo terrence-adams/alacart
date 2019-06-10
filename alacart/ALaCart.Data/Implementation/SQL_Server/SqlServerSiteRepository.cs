@@ -73,5 +73,18 @@ namespace ALaCart.Data.Implementation.SQL_Server
             }
 
         }
+
+
+        public ICollection<Restaurant> GetAllRestaurantsById(string restaurantId)
+        {
+
+            using (var context = new ALaCartDbContext())
+            {
+                return context.Restaurants
+                    .Where(r => r.ID == int.Parse(restaurantId)).
+                    ToList();
+            }
+
+        }
     }
 }
