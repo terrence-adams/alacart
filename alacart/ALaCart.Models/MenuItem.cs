@@ -14,5 +14,11 @@ namespace ALaCart.Models
         public string Name { get; set; }
 
         public decimal Price { get; set; }
+
+        public string RestaurantId { get; set; }
+        public Restaurant Restaurant { get; set; }
+
+        public string MenuId { get; set; }
+        public Menu Menu { get; set; }
     }
 }

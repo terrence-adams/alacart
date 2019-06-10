@@ -14,14 +14,16 @@ namespace ALaCart.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<Customer> _userManager;
-        private readonly SignInManager<Customer> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<Customer> userManager, SignInManager<Customer> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
 
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager; //need to verify if passing in parent class allows usage of child class
 
 
         }
@@ -31,6 +33,13 @@ namespace ALaCart.Controllers
         public IActionResult Register()
         {
             RedirectUserWhenAlreadLoggedIn();
+            var roles = _roleManager.Roles.ToList();
+
+            var vm = new RegisterViewModel
+            {
+                Roles = roles
+            };
+
             return View();
 
         }

@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using ALaCart.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace ALaCart.Data.Context
 {
@@ -16,6 +17,11 @@ namespace ALaCart.Data.Context
         public DbSet<Menu> Menus { get; set; }
 
         public DbSet<MenuItem> MenuItems { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
 
 
 
@@ -39,6 +45,28 @@ namespace ALaCart.Data.Context
                 new Restaurant { ID = 4, Name = " Chicken Matters", Description = " Your mama's chicken, served to go." },
                 new Restaurant { ID = 5, Name = " Vegans 4 Life", Description = " Delicious Vegan and Veggie options" }
                 );
+            modelBuilder.Entity<Menu>()
+                .HasOne(m => m.Restaurant)
+                .WithMany(mu => mu.RestaurantMenus)
+                .HasForeignKey(m => m.RestaurantId);
+
+
+
+            modelBuilder.Entity<MenuItem>()
+                .HasOne(m => m.Menu)
+                .WithMany(mi => mi.MenuItems)
+                .HasForeignKey(m => m.MenuId);
+
+
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(
+                    new IdentityRole { Name = " Admin", NormalizedName = "ADMIN" },
+                    new IdentityRole { Name = "User", NormalizedName = "USER" },
+                    new IdentityRole { Name = "Employee", NormalizedName = "Employee" },
+                    new IdentityRole { Name = "Vendor", NormalizedName = "VENDOR" }
+                );
+
+
 
         }
 

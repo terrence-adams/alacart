@@ -6,16 +6,8 @@ using System.Text;
 
 namespace ALaCart.Models
 {
-    public class Customer : IdentityUser
+    public class Customer : AppUser
     {
-
-        [Required]
-        [MaxLength(30)]
-        public string FirstName { get; set; }
-
-        [Required]
-        [MaxLength(30)]
-        public string LastName { get; set; }
 
 
         [MaxLength(30)]
@@ -23,7 +15,7 @@ namespace ALaCart.Models
 
         /*[Required]
         [MaxLength(10)]
-        public string PhoneNumber { get; set; }*/
+        public string PhoneNumber { get; set; } redundant based on default User property*/
 
 
         public Address CustomerAddress { get; set; }
