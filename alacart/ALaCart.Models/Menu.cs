@@ -15,7 +15,7 @@ namespace ALaCart.Models
         public Restaurant Restaurant { get; set; }
 
         [Required]
-        public string RestaurantId { get; set; }
+        public int RestaurantId { get; set; }
 
 
     }

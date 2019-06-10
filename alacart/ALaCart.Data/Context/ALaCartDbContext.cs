@@ -39,11 +39,11 @@ namespace ALaCart.Data.Context
         {
             base.OnModelCreating(modelBuilder); //identity server
             modelBuilder.Entity<Restaurant>().HasData(
-                new Restaurant { ID = 1, Name = "Old Hubbards", Description = "Soul food" },
-                new Restaurant { ID = 2, Name = "Billy Ray's Burgers", Description = "Classic burgers and shakes." },
-                new Restaurant { ID = 3, Name = "Thai-phun", Description = "Traditional Thai food with a twist" },
-                new Restaurant { ID = 4, Name = " Chicken Matters", Description = " Your mama's chicken, served to go." },
-                new Restaurant { ID = 5, Name = " Vegans 4 Life", Description = " Delicious Vegan and Veggie options" }
+                new Restaurant { ID = 1, Name = "Old Hubbards", Description = "Soul food", SiteId = 1 },
+                new Restaurant { ID = 2, Name = "Billy Ray's Burgers", Description = "Classic burgers and shakes.", SiteId = 1 },
+                new Restaurant { ID = 3, Name = "Thai-phun", Description = "Traditional Thai food with a twist", SiteId = 1 },
+                new Restaurant { ID = 4, Name = " Chicken Matters", Description = " Your mama's chicken, served to go.", SiteId = 1 },
+                new Restaurant { ID = 5, Name = " Vegans 4 Life", Description = " Delicious Vegan and Veggie options", SiteId = 1 }
                 );
             modelBuilder.Entity<Menu>()
                 .HasOne(m => m.Restaurant)

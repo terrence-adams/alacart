@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ALaCart.Data.Migrations
 {
     [DbContext(typeof(ALaCartDbContext))]
-    [Migration("20190610052202_LogIN")]
-    partial class LogIN
+    [Migration("20190610073313_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,13 +142,11 @@ namespace ALaCart.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("RestaurantIdOfMenu");
-
-                    b.Property<int?>("RestaurantOfMenuID");
+                    b.Property<int>("RestaurantId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("RestaurantOfMenuID");
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Menus");
                 });
@@ -159,7 +157,7 @@ namespace ALaCart.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MenuID");
+                    b.Property<int>("MenuId");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -168,11 +166,17 @@ namespace ALaCart.Data.Migrations
 
                     b.Property<decimal>("Price");
 
+                    b.Property<int?>("RestaurantID");
+
+                    b.Property<string>("RestaurantId");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("MenuID");
+                    b.HasIndex("MenuId");
 
                     b.HasIndex("OrderID");
+
+                    b.HasIndex("RestaurantID");
 
                     b.ToTable("MenuItems");
                 });
@@ -188,19 +192,15 @@ namespace ALaCart.Data.Migrations
                     b.Property<string>("CustomerID")
                         .IsRequired();
 
-                    b.Property<int?>("RestaurantID");
-
                     b.Property<int>("SiteID");
 
                     b.HasKey("ID");
 
                     b.HasIndex("CartID");
 
-                    b.HasIndex("RestaurantID");
-
                     b.HasIndex("SiteID");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ALaCart.Models.Restaurant", b =>
@@ -217,13 +217,11 @@ namespace ALaCart.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int>("RestaurantMenuID");
-
-                    b.Property<int?>("SiteID");
+                    b.Property<int>("SiteId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SiteID");
+                    b.HasIndex("SiteId");
 
                     b.ToTable("Restaurants");
 
@@ -233,35 +231,35 @@ namespace ALaCart.Data.Migrations
                             ID = 1,
                             Description = "Soul food",
                             Name = "Old Hubbards",
-                            RestaurantMenuID = 0
+                            SiteId = 1
                         },
                         new
                         {
                             ID = 2,
                             Description = "Classic burgers and shakes.",
                             Name = "Billy Ray's Burgers",
-                            RestaurantMenuID = 0
+                            SiteId = 1
                         },
                         new
                         {
                             ID = 3,
                             Description = "Traditional Thai food with a twist",
                             Name = "Thai-phun",
-                            RestaurantMenuID = 0
+                            SiteId = 1
                         },
                         new
                         {
                             ID = 4,
                             Description = " Your mama's chicken, served to go.",
                             Name = " Chicken Matters",
-                            RestaurantMenuID = 0
+                            SiteId = 1
                         },
                         new
                         {
                             ID = 5,
                             Description = " Delicious Vegan and Veggie options",
                             Name = " Vegans 4 Life",
-                            RestaurantMenuID = 0
+                            SiteId = 1
                         });
                 });
 
@@ -307,6 +305,36 @@ namespace ALaCart.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "83cd0d31-fb16-4d9b-80b3-5b44d02803f0",
+                            ConcurrencyStamp = "bffe01a0-5cff-4a41-b231-a064cefe315e",
+                            Name = " Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "1bf359c2-de68-42ba-811b-bb7b300f77dc",
+                            ConcurrencyStamp = "44afc0f1-3604-45a4-81f4-e87b8dc21635",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "52caf269-6d8f-4f59-adaa-85229fa3ee41",
+                            ConcurrencyStamp = "0588e7c6-fc26-4557-8763-2722314a529c",
+                            Name = "Employee",
+                            NormalizedName = "Employee"
+                        },
+                        new
+                        {
+                            Id = "1f968e6f-9790-4a68-a213-0ba6748e2be8",
+                            ConcurrencyStamp = "9eba8397-dfba-48cf-b474-a228c193401c",
+                            Name = "Vendor",
+                            NormalizedName = "VENDOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -415,20 +443,26 @@ namespace ALaCart.Data.Migrations
 
             modelBuilder.Entity("ALaCart.Models.Menu", b =>
                 {
-                    b.HasOne("ALaCart.Models.Restaurant", "RestaurantOfMenu")
+                    b.HasOne("ALaCart.Models.Restaurant", "Restaurant")
                         .WithMany("RestaurantMenus")
-                        .HasForeignKey("RestaurantOfMenuID");
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ALaCart.Models.MenuItem", b =>
                 {
-                    b.HasOne("ALaCart.Models.Menu")
+                    b.HasOne("ALaCart.Models.Menu", "Menu")
                         .WithMany("MenuItems")
-                        .HasForeignKey("MenuID");
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ALaCart.Models.Order")
                         .WithMany("Items")
                         .HasForeignKey("OrderID");
+
+                    b.HasOne("ALaCart.Models.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantID");
                 });
 
             modelBuilder.Entity("ALaCart.Models.Order", b =>
@@ -436,10 +470,6 @@ namespace ALaCart.Data.Migrations
                     b.HasOne("ALaCart.Models.Cart")
                         .WithMany("CustomerOrders")
                         .HasForeignKey("CartID");
-
-                    b.HasOne("ALaCart.Models.Restaurant")
-                        .WithMany("RestaurantOrders")
-                        .HasForeignKey("RestaurantID");
 
                     b.HasOne("ALaCart.Models.Site", "Site")
                         .WithMany()
@@ -449,9 +479,10 @@ namespace ALaCart.Data.Migrations
 
             modelBuilder.Entity("ALaCart.Models.Restaurant", b =>
                 {
-                    b.HasOne("ALaCart.Models.Site")
+                    b.HasOne("ALaCart.Models.Site", "Site")
                         .WithMany("Restaurants")
-                        .HasForeignKey("SiteID");
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ALaCart.Models.Site", b =>

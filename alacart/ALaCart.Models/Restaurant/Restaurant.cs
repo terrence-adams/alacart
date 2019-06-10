@@ -22,7 +22,7 @@ namespace ALaCart.Models
         [Display(Name = "Menu")]
         public List<Menu> RestaurantMenus { get; set; }
 
-        public string SiteId { get; set; }
+        public int SiteId { get; set; }
 
         public Site Site { get; set; }
 

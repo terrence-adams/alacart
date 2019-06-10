@@ -15,10 +15,10 @@ namespace ALaCart.Models
 
         public decimal Price { get; set; }
 
-        public string RestaurantId { get; set; }
+        public int RestaurantId { get; set; }
         public Restaurant Restaurant { get; set; }
 
-        public string MenuId { get; set; }
+        public int MenuId { get; set; }
         public Menu Menu { get; set; }
     }
 }
