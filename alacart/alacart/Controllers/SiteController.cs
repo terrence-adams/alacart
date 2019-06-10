@@ -97,5 +97,14 @@ namespace ALaCart.Controllers
             return View(restaurant);
 
         }
+
+
+        private void ReturnAllRestaurants()
+        {
+
+            var myRestaurants = _siteService.GetAllRestaurants();
+            ViewData.Add(RESTAURANTS, myRestaurants);
+
+        }
     }
 }

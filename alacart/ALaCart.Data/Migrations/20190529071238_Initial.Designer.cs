@@ -4,14 +4,16 @@ using ALaCart.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ALaCart.Data.Migrations
 {
     [DbContext(typeof(ALaCartDbContext))]
-    partial class ALaCartDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190529071238_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,7 +76,7 @@ namespace ALaCart.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<int?>("CustomerAddressID");
+                    b.Property<int>("CustomerAddressID");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -404,7 +406,8 @@ namespace ALaCart.Data.Migrations
                 {
                     b.HasOne("ALaCart.Models.Address", "CustomerAddress")
                         .WithMany()
-                        .HasForeignKey("CustomerAddressID");
+                        .HasForeignKey("CustomerAddressID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ALaCart.Models.Site")
                         .WithMany("Customers")

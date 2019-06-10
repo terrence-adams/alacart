@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ALaCart.Models
 {
-    public class Customer
+    public class Customer : IdentityUser
     {
-        [Required]
-        public int ID { get; set; }
 
         [Required]
         [MaxLength(30)]
@@ -22,11 +21,10 @@ namespace ALaCart.Models
         [MaxLength(30)]
         public string EmailAddress { get; set; }
 
-        [Required]
+        /*[Required]
         [MaxLength(10)]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }*/
 
-        public Cart CustomerCart { get; set; }
 
         public Address CustomerAddress { get; set; }
 

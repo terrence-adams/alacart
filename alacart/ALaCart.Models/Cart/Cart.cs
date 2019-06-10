@@ -7,7 +7,11 @@ namespace ALaCart.Models
 {
     public class Cart
     {
-        [Required]
+
         public int ID { get; set; }
+
+        public List<Order> CustomerOrders { get; set; }
+
+        public string CustomerID { get; set; }
     }
 }

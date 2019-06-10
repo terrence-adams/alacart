@@ -19,9 +19,13 @@ namespace ALaCart.Models
         [MaxLength(100)]
         public string Description { get; set; }
 
+        [Display(Name = "Menu")]
         public List<Menu> RestaurantMenus { get; set; }
 
         public int RestaurantMenuID { get; set; }
+
+
+        public List<Order> RestaurantOrders { get; set; }
 
 
     }
