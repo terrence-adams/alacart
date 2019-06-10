@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ALaCart.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class IdentityUserRoles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,7 +103,7 @@ namespace ALaCart.Data.Migrations
                     FirstName = table.Column<string>(maxLength: 30, nullable: false),
                     LastName = table.Column<string>(maxLength: 30, nullable: false),
                     EmailAddress = table.Column<string>(maxLength: 30, nullable: true),
-                    CustomerAddressID = table.Column<int>(nullable: false),
+                    CustomerAddressID = table.Column<int>(nullable: true),
                     SiteID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -114,7 +114,7 @@ namespace ALaCart.Data.Migrations
                         column: x => x.CustomerAddressID,
                         principalTable: "Address",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Sites_SiteID",
                         column: x => x.SiteID,
@@ -151,18 +151,17 @@ namespace ALaCart.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Description = table.Column<string>(maxLength: 100, nullable: false),
-                    RestaurantMenuID = table.Column<int>(nullable: false),
-                    SiteID = table.Column<int>(nullable: true)
+                    SiteId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Restaurants", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Restaurants_Sites_SiteID",
-                        column: x => x.SiteID,
+                        name: "FK_Restaurants_Sites_SiteId",
+                        column: x => x.SiteId,
                         principalTable: "Sites",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -251,55 +250,47 @@ namespace ALaCart.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Menus",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RestaurantOfMenuID = table.Column<int>(nullable: true),
-                    RestaurantIdOfMenu = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Menus", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Menus_Restaurants_RestaurantOfMenuID",
-                        column: x => x.RestaurantOfMenuID,
-                        principalTable: "Restaurants",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SiteID = table.Column<int>(nullable: false),
                     CustomerID = table.Column<string>(nullable: false),
-                    CartID = table.Column<int>(nullable: true),
-                    RestaurantID = table.Column<int>(nullable: true)
+                    CartID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.ID);
+                    table.PrimaryKey("PK_Orders", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Order_Cart_CartID",
+                        name: "FK_Orders_Cart_CartID",
                         column: x => x.CartID,
                         principalTable: "Cart",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Order_Restaurants_RestaurantID",
-                        column: x => x.RestaurantID,
-                        principalTable: "Restaurants",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Order_Sites_SiteID",
+                        name: "FK_Orders_Sites_SiteID",
                         column: x => x.SiteID,
                         principalTable: "Sites",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Menus",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RestaurantId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Menus", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Menus_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -312,36 +303,55 @@ namespace ALaCart.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    MenuID = table.Column<int>(nullable: true),
+                    RestaurantId = table.Column<string>(nullable: true),
+                    RestaurantID = table.Column<int>(nullable: true),
+                    MenuId = table.Column<int>(nullable: false),
                     OrderID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MenuItems", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_MenuItems_Menus_MenuID",
-                        column: x => x.MenuID,
+                        name: "FK_MenuItems_Menus_MenuId",
+                        column: x => x.MenuId,
                         principalTable: "Menus",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MenuItems_Orders_OrderID",
+                        column: x => x.OrderID,
+                        principalTable: "Orders",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_MenuItems_Order_OrderID",
-                        column: x => x.OrderID,
-                        principalTable: "Order",
+                        name: "FK_MenuItems_Restaurants_RestaurantID",
+                        column: x => x.RestaurantID,
+                        principalTable: "Restaurants",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
-                table: "Restaurants",
-                columns: new[] { "ID", "Description", "Name", "RestaurantMenuID", "SiteID" },
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "Soul food", "Old Hubbards", 0, null },
-                    { 2, "Classic burgers and shakes.", "Billy Ray's Burgers", 0, null },
-                    { 3, "Traditional Thai food with a twist", "Thai-phun", 0, null },
-                    { 4, " Your mama's chicken, served to go.", " Chicken Matters", 0, null },
-                    { 5, " Delicious Vegan and Veggie options", " Vegans 4 Life", 0, null }
+                    { "b14e1727-f35b-46c0-b13a-df808aa389d4", "17a78f0e-d4d9-4027-bf7d-9c32f09f0d9f", " Admin", "ADMIN" },
+                    { "b539a25b-92af-4d38-af3a-3f2a36d737e3", "dcae55e6-dd25-4b5b-b44e-bdf03655e154", "User", "USER" },
+                    { "eedcfa69-3833-409b-81bb-ac1efe12075a", "111e38ba-123a-4df3-9abe-2748a573f6cc", "Employee", "Employee" },
+                    { "e47ae53f-db77-4ac7-a39a-37099c555aa8", "2cc82f7c-c1be-4e47-9aad-a8d740acca8d", "Vendor", "VENDOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Restaurants",
+                columns: new[] { "ID", "Description", "Name", "SiteId" },
+                values: new object[,]
+                {
+                    { 1, "Soul food", "Old Hubbards", 1 },
+                    { 2, "Classic burgers and shakes.", "Billy Ray's Burgers", 1 },
+                    { 3, "Traditional Thai food with a twist", "Thai-phun", 1 },
+                    { 4, " Your mama's chicken, served to go.", " Chicken Matters", 1 },
+                    { 5, " Delicious Vegan and Veggie options", " Vegans 4 Life", 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -399,9 +409,9 @@ namespace ALaCart.Data.Migrations
                 column: "SiteID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MenuItems_MenuID",
+                name: "IX_MenuItems_MenuId",
                 table: "MenuItems",
-                column: "MenuID");
+                column: "MenuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MenuItems_OrderID",
@@ -409,29 +419,29 @@ namespace ALaCart.Data.Migrations
                 column: "OrderID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Menus_RestaurantOfMenuID",
-                table: "Menus",
-                column: "RestaurantOfMenuID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Order_CartID",
-                table: "Order",
-                column: "CartID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Order_RestaurantID",
-                table: "Order",
+                name: "IX_MenuItems_RestaurantID",
+                table: "MenuItems",
                 column: "RestaurantID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_SiteID",
-                table: "Order",
+                name: "IX_Menus_RestaurantId",
+                table: "Menus",
+                column: "RestaurantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CartID",
+                table: "Orders",
+                column: "CartID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_SiteID",
+                table: "Orders",
                 column: "SiteID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurants_SiteID",
+                name: "IX_Restaurants_SiteId",
                 table: "Restaurants",
-                column: "SiteID");
+                column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sites_SiteAddressID",
@@ -469,13 +479,13 @@ namespace ALaCart.Data.Migrations
                 name: "Menus");
 
             migrationBuilder.DropTable(
-                name: "Order");
-
-            migrationBuilder.DropTable(
-                name: "Cart");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Restaurants");
+
+            migrationBuilder.DropTable(
+                name: "Cart");
 
             migrationBuilder.DropTable(
                 name: "Sites");
